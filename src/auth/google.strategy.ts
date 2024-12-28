@@ -25,6 +25,8 @@ export class GoogleStrategy extends PassportStrategy(Strategy, "google") {
 
     async validate(accessToken: string, refreshToken: string, profile: any, done: VerifyCallback): Promise<any> {
         try {
+            this.logger.log(`[Google Strategy] Validating profile for: ${profile.emails[0].value}`);
+
             const { name, emails, photos } = profile;
             const user = {
                 email: emails[0].value,
@@ -34,10 +36,10 @@ export class GoogleStrategy extends PassportStrategy(Strategy, "google") {
                 accessToken,
             };
 
-            this.logger.log(`Successfully validated Google profile for email: ${emails[0].value}`);
+            this.logger.log(`[Google Strategy] Successfully validated profile for: ${user.email}`);
             done(null, user);
         } catch (error) {
-            this.logger.error(`Error validating Google profile: ${error.message}`);
+            this.logger.error(`[Google Strategy Error] ${error.message}`, error.stack);
             done(error, null);
         }
     }

@@ -32,6 +32,7 @@ let GoogleStrategy = GoogleStrategy_1 = class GoogleStrategy extends (0, passpor
     }
     async validate(accessToken, refreshToken, profile, done) {
         try {
+            this.logger.log(`[Google Strategy] Validating profile for: ${profile.emails[0].value}`);
             const { name, emails, photos } = profile;
             const user = {
                 email: emails[0].value,
@@ -40,11 +41,11 @@ let GoogleStrategy = GoogleStrategy_1 = class GoogleStrategy extends (0, passpor
                 picture: photos[0].value,
                 accessToken,
             };
-            this.logger.log(`Successfully validated Google profile for email: ${emails[0].value}`);
+            this.logger.log(`[Google Strategy] Successfully validated profile for: ${user.email}`);
             done(null, user);
         }
         catch (error) {
-            this.logger.error(`Error validating Google profile: ${error.message}`);
+            this.logger.error(`[Google Strategy Error] ${error.message}`, error.stack);
             done(error, null);
         }
     }
