@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Param, UseGuards, Req, Get } from "@nestjs/common";
+import { Controller, Post, Body, Param, UseGuards, Req, Get, Logger } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 import { ChatService } from "./services/chat.service";
 import { TemplateService } from "./services/template.service";
@@ -12,6 +12,8 @@ import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, ApiBody } from "@nes
 @Controller("chat")
 @UseGuards(AuthGuard("jwt"))
 export class ChatController {
+    private readonly logger = new Logger(ChatController.name);
+
     constructor(
         private chatService: ChatService,
         private templateService: TemplateService
@@ -138,7 +140,7 @@ export class ChatController {
             example: {
                 id: 1,
                 title: "프로젝트 회의록",
-                lastResult: "마지막 생성된 문서 내용",
+                lastResult: "마��막 생성된 문서 내용",
                 createdAt: "2024-03-15T12:00:00Z",
                 chats: [
                     {
@@ -152,5 +154,27 @@ export class ChatController {
     })
     async getChatRoom(@Param("roomId") roomId: number, @Req() req) {
         return this.chatService.getChatRoom(roomId, req.user.id);
+    }
+
+    @Post("similarity")
+    @ApiOperation({ summary: "프롬프트와 템플릿 간의 최대 유사도 계산" })
+    @ApiResponse({
+        status: 200,
+        description: "유사도 계산 결과",
+        schema: {
+            example: {
+                similarity: 0.85,
+                template: {
+                    id: 1,
+                    name: "이력서 템플릿",
+                    content: "템플릿 내용...",
+                },
+            },
+        },
+    })
+    async calculateSimilarity(@Body() body: { prompt: string }) {
+        this.logger.log(`[Similarity] Calculating similarity for prompt: ${body.prompt.substring(0, 50)}...`);
+        const result = await this.templateService.calculateMaxSimilarity(body.prompt);
+        return result;
     }
 }
