@@ -19,6 +19,7 @@ const config_1 = require("@nestjs/config");
 let GoogleStrategy = GoogleStrategy_1 = class GoogleStrategy extends (0, passport_1.PassportStrategy)(passport_google_oauth20_1.Strategy, "google") {
     constructor(authService, configService) {
         const callbackURL = `${configService.get("API_URL")}/auth/google/callback`;
+        console.log("callbackURL", callbackURL);
         super({
             clientID: configService.get("GOOGLE_CLIENT_ID"),
             clientSecret: configService.get("GOOGLE_CLIENT_SECRET"),

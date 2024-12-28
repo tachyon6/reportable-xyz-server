@@ -13,6 +13,7 @@ export class GoogleStrategy extends PassportStrategy(Strategy, "google") {
         private readonly configService: ConfigService
     ) {
         const callbackURL = `${configService.get<string>("API_URL")}/auth/google/callback`;
+        console.log("callbackURL", callbackURL);
         super({
             clientID: configService.get<string>("GOOGLE_CLIENT_ID"),
             clientSecret: configService.get<string>("GOOGLE_CLIENT_SECRET"),
