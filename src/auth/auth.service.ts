@@ -23,9 +23,12 @@ export class AuthService {
                 name,
                 profileImage,
             });
-            await this.userRepository.save(user);
+        } else {
+            user.name = name;
+            user.profileImage = profileImage;
         }
 
+        await this.userRepository.save(user);
         return user;
     }
 
