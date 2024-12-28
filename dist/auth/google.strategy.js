@@ -20,7 +20,7 @@ let GoogleStrategy = class GoogleStrategy extends (0, passport_1.PassportStrateg
         super({
             clientID: configService.get("GOOGLE_CLIENT_ID"),
             clientSecret: configService.get("GOOGLE_CLIENT_SECRET"),
-            callbackURL: `${configService.get("CLIENT_URL")}/auth/google/callback`,
+            callbackURL: `${configService.get("API_URL")}/auth/google/callback`,
             scope: ["email", "profile"],
         });
         this.authService = authService;
