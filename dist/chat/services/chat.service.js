@@ -30,6 +30,9 @@ let ChatService = class ChatService {
     }
     async createChatRoom(userId, dto) {
         const template = await this.templateService.findMatchingTemplate(dto.initialPrompt);
+        if (template) {
+            console.log("template", template);
+        }
         const initialResponse = await this.openAIService.generateDocument(dto.initialPrompt, template?.content);
         const chatRoom = this.chatRoomRepository.create({
             title: initialResponse.title,
