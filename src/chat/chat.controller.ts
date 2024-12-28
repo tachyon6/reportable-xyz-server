@@ -6,6 +6,7 @@ import { CreateChatRoomDto } from "./dto/create-chat-room.dto";
 import { CreateChatDto } from "./dto/create-chat.dto";
 import { CreateTemplateDto } from "./dto/create-template.dto";
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, ApiBody } from "@nestjs/swagger";
+import { CalculateSimilarityDto } from "./dto/calculate-similarity.dto";
 
 @ApiTags("채팅")
 @ApiBearerAuth()
@@ -70,7 +71,7 @@ export class ChatController {
     @ApiOperation({ summary: "채팅방에 새 메시지 추가" })
     @ApiResponse({
         status: 201,
-        description: "채��� 메시지 추가 성공",
+        description: "채팅 메시지 추가 성공",
         schema: {
             example: {
                 id: 1,
@@ -172,10 +173,10 @@ export class ChatController {
             },
         },
     })
-    @ApiBody({ type: String })
-    async calculateSimilarity(@Body() prompt: string) {
-        this.logger.log(`[Similarity] Calculating similarity for prompt: ${prompt.substring(0, 50)}...`);
-        const result = await this.templateService.calculateMaxSimilarity(prompt);
+    @ApiBody({ type: CalculateSimilarityDto })
+    async calculateSimilarity(@Body() dto: CalculateSimilarityDto) {
+        this.logger.log(`[Similarity] Calculating similarity for prompt: ${dto.prompt.substring(0, 50)}...`);
+        const result = await this.templateService.calculateMaxSimilarity(dto.prompt);
         return result;
     }
 }
