@@ -70,7 +70,7 @@ export class ChatController {
     @ApiOperation({ summary: "채팅방에 새 메시지 추가" })
     @ApiResponse({
         status: 201,
-        description: "채팅 메시지 추가 성공",
+        description: "채��� 메시지 추가 성공",
         schema: {
             example: {
                 id: 1,
@@ -140,7 +140,7 @@ export class ChatController {
             example: {
                 id: 1,
                 title: "프로젝트 회의록",
-                lastResult: "마��막 생성된 문서 내용",
+                lastResult: "마지막 생성된 문서 내용",
                 createdAt: "2024-03-15T12:00:00Z",
                 chats: [
                     {
@@ -172,9 +172,10 @@ export class ChatController {
             },
         },
     })
-    async calculateSimilarity(@Body() body: { prompt: string }) {
-        this.logger.log(`[Similarity] Calculating similarity for prompt: ${body.prompt.substring(0, 50)}...`);
-        const result = await this.templateService.calculateMaxSimilarity(body.prompt);
+    @ApiBody({ type: String })
+    async calculateSimilarity(@Body() prompt: string) {
+        this.logger.log(`[Similarity] Calculating similarity for prompt: ${prompt.substring(0, 50)}...`);
+        const result = await this.templateService.calculateMaxSimilarity(prompt);
         return result;
     }
 }
