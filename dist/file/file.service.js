@@ -17,8 +17,8 @@ let FileService = class FileService {
     constructor(configService) {
         this.configService = configService;
         this.s3 = new aws_sdk_1.S3({
-            accessKeyId: this.configService.get("AWS_ACCESS_KEY_ID"),
-            secretAccessKey: this.configService.get("AWS_SECRET_ACCESS_KEY"),
+            accessKeyId: this.configService.get("AWS_ACCESS_KEY"),
+            secretAccessKey: this.configService.get("AWS_SECRET_KEY"),
             region: this.configService.get("AWS_REGION"),
         });
     }
