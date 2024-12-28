@@ -1,1 +1,0 @@
-{"version":3,"file":"create-chat-room.dto.js","sourceRoot":"","sources":["../../../src/chat/dto/create-chat-room.dto.ts"],"names":[],"mappings":";;;;;;;;;;;;AAAA,qDAAuD;AACvD,6CAA8C;AAE9C,MAAa,iBAAiB;CAQ7B;AARD,8CAQC;AADG;IANC,IAAA,qBAAW,EAAC;QACT,WAAW,EAAE,SAAS;QACtB,OAAO,EAAE,aAAa;KACzB,CAAC;IACD,IAAA,0BAAQ,GAAE;IACV,IAAA,4BAAU,GAAE;;wDACS"}
