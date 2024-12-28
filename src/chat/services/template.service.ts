@@ -127,6 +127,6 @@ export class TemplateService {
         console.log("bestMatch", bestMatch, bestMatch.similarity);
 
         // 유사도가 일정 임계값(0.7)을 넘는 경우에만 템플릿 반환
-        return bestMatch.similarity > 0.7 ? bestMatch.template : null;
+        return bestMatch.similarity > 0.5 ? bestMatch.template : null;
     }
 }
