@@ -19,6 +19,7 @@ async function bootstrap() {
             "http://localhost:3000",
             "https://reportable.xyz",
             "https://www.reportable.xyz",
+            "https://heartsolo.com",
         ],
         credentials: true,
     });
