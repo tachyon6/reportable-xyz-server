@@ -5,6 +5,7 @@ import { typeOrmConfigAsync } from "./config/typeorm.config";
 import { AuthModule } from "./auth/auth.module";
 import { ChatModule } from "./chat/chat.module";
 import { FileModule } from "./file/file.module";
+import { EmailModule } from "./email/email.module";
 
 @Module({
     imports: [
@@ -15,6 +16,7 @@ import { FileModule } from "./file/file.module";
         AuthModule,
         ChatModule,
         FileModule,
+        EmailModule,
     ],
 })
 export class AppModule {}
